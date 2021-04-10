@@ -10,6 +10,7 @@ To run project follow these steps-
 - create virtual environment $pip install virtualenv (you can skip this step if already have virtualenv)
 - $virtualenv venv, $source venv/bin/activate (use 'work on venv' if on windows)
 - $ python -m pip install Django
+- $ pip install pillow
 - $ install and configure mysql pkg if not using sqlite
 - $ python manage.py makemigrations
 - $ python manage.py migrate 

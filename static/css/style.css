@@ -60,3 +60,18 @@ html, body {
 .mr0 {
     margin-right: 0 !important;
 }
+
+/* - - - - - - - - - - - - - - - - - - - Profile-editprofile css - - - - - - - - - - - - - - - - - - -  */
+
+.profile-box {
+    padding: 15px !important;
+    margin-bottom: 40px;
+}
+
+.dp {
+    border-radius: 50%;
+}
+
+.pro-head {
+    padding-bottom: 30px !important;
+}
