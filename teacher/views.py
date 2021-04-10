@@ -12,6 +12,18 @@ from django.contrib.auth.decorators import user_passes_test
 def home(request):
     return render(request, 'home.html')
 
+
+def contactus(request):
+    form = contactusForm(request.POST or None)
+    if request.method=='POST':
+        if form.is_valid():
+            form.save()
+        messages.info(request,'Form submitted successfully')
+        return redirect('contactus')
+    else:
+        return render(request, 'contactus.html', {'form': form})
+
+
 def please_login(request):
     msg = "You need to be logged-in to view this page"
     messages.info(request, msg)
