@@ -13,6 +13,10 @@ def home(request):
     return render(request, 'home.html')
 
 
+def dashboard(request):
+    return render(request, 'dashboard.html')
+
+
 def contactus(request):
     form = contactusForm(request.POST or None)
     if request.method=='POST':
