@@ -12,7 +12,7 @@ html, body {
     font-family: "Lucida Grande"!important;
 }
 
-.container-fluid {
+.container {
     min-height: 60vh;
 }
 
@@ -93,7 +93,7 @@ a:hover {
 /* - - - - - - - - - - - - - - - - - - - Dashboard css - - - - - - - - - - - - - - - - - - - - - -  */
 
 .dnavbar {
-    height: 40px;
+    height: 45px;
 }
 
 .sidebar-section {
@@ -120,7 +120,7 @@ a:hover {
 }
 
 .sidebar {
-    width: 168px !important;
+    height: 100% !important;
 }
 
 .widget {
