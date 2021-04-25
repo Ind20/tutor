@@ -3,8 +3,8 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
-from .models import userProfile
-from .forms import contactusForm, userProfileForm, userUpdateForm, userProfileUpdateForm
+from .models import userProfile, qualification, experience
+from .forms import contactusForm, userProfileForm, userUpdateForm, userProfileUpdateForm, qualificationForm, experienceForm
 from django.views.generic import TemplateView, ListView
 from django.contrib.auth.decorators import user_passes_test
 
@@ -57,8 +57,15 @@ def login(request):
 
 @login_required
 def profile (request):
-    p_form = userProfileForm(instance=request.user.userprofile)
-    return render(request, 'profile.html', {'p_form': p_form})
+    p_form          = userProfileForm(instance=request.user.userprofile)
+    qualifications  = qualification.objects.filter(user_id=request.user.id)
+    experiences     = experience.objects.filter(user_id=request.user.id)
+    context = {
+        'proj': p_form,
+        'qualifications': qualifications,
+        'experiences': experiences
+    }
+    return render(request, 'profile.html', context)
 
 
 @login_required
@@ -114,3 +121,73 @@ def register(request):
             return redirect('register')
     else:
         return render(request,"register.html")
+
+@login_required
+def addqualification(request):
+    form= qualificationForm(request.POST or None)
+    uid = request.user.id
+    if request.method=='POST':
+        if form.is_valid():
+           quali = form.save(commit=False)
+           quali.user = request.user
+           quali.save()
+        messages.info(request,'Qualification submitted successfully')
+        return redirect('/profile') 
+    else:
+        return render(request, 'addqualification.html', {'form': form})
+
+
+
+@login_required
+def editqualification(request, id):
+    userqualification = qualification.objects.get(id=id)
+    form = qualificationForm(request.POST or None, instance=userqualification)
+    uid = request.user.id
+    q_user = userqualification.user_id
+    if uid != q_user:
+        messages.info(request,'You do not have permisson to edit this item')
+        return redirect('/profile') 
+    else:
+        if request.method=='POST':
+            if form.is_valid():
+                form.save()
+            messages.info(request,'Qualification edited successfully')
+            return redirect('/profile') 
+        else:
+            return render(request, 'editqualification.html', {'form': form, 'userqualification': userqualification})
+
+
+
+@login_required
+def addexperience(request):
+    form= experienceForm(request.POST or None)
+    uid = request.user.id
+    if request.method=='POST':
+        if form.is_valid():
+           exp = form.save(commit=False)
+           exp.user = request.user
+           exp.save()
+        messages.info(request,'Experience submitted successfully')
+        return redirect('/profile') 
+    else:
+        return render(request, 'addexperience.html', {'form': form})
+
+
+
+@login_required
+def editexperience(request, id):
+    userexperience = experience.objects.get(id=id)
+    form = experienceForm(request.POST or None, instance=userexperience)
+    uid = request.user.id
+    q_user = userexperience.user_id
+    if uid != q_user:
+        messages.info(request,'You do not have permisson to edit this item')
+        return redirect('/profile') 
+    else:
+        if request.method=='POST':
+            if form.is_valid():
+                form.save()
+            messages.info(request,'Experience edited successfully')
+            return redirect('/profile') 
+        else:
+            return render(request, 'editexperience.html', {'form': form, 'userexperience': userexperience})

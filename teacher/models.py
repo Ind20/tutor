@@ -19,3 +19,20 @@ class contactus(models.Model):
     phone_num       = models.CharField(max_length=15)
     email           = models.EmailField()
     message         = models.TextField(max_length=1000)
+
+
+
+class qualification(models.Model):
+    course          = models.CharField(max_length=250)
+    school          = models.CharField(max_length=250)
+    grade           = models.CharField(max_length=10)
+    year            = models.DateField(auto_now=False, null=True)
+    user            = models.ForeignKey(User, related_name='qualifications', on_delete=models.CASCADE)
+
+
+class experience(models.Model):
+    organisation    = models.CharField(max_length=250)
+    post            = models.CharField(max_length=250)
+    from_date       = models.DateField(max_length=10)
+    to_date         = models.DateField(auto_now=False, null=True)
+    user            = models.ForeignKey(User, related_name='experiences', on_delete=models.CASCADE)

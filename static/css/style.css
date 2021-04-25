@@ -43,7 +43,7 @@ a {
     text-decoration: none !important;
 }
 a:hover {
-    color: green !important;
+    color: #0088cc !important;
 }
 
 
@@ -63,6 +63,10 @@ a:hover {
     margin: 0 10px 0 5px;
 }
 
+.dp {
+    border-radius: 50%;
+}
+
 
 /* - - - - - - - - - - - - - - - - - - - Footer css - - - - - - - - - - - - - - - - - - - - - -  */
 
@@ -80,8 +84,8 @@ a:hover {
     margin-bottom: 40px;
 }
 
-.dp {
-    border-radius: 50%;
+.pdp {
+    border-radius: 10%;
 }
 
 .pro-head {

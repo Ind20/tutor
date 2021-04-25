@@ -13,5 +13,11 @@ urlpatterns =[
     path('profile', views.profile, name="profile"),
     path('editprofile', views.editprofile, name="editprofile"),
 
+    path('addqualification', views.addqualification, name="addqualification"),
+    path('editqualification/<int:id>', views.editqualification, name="editqualification"),
+    path('addexperience', views.addexperience, name="addexperience"),
+    path('editexperience/<int:id>', views.editexperience, name="editexperience"),
+
+
     path('dashboard', views.dashboard, name="dashboard"),
 ]
