@@ -12,9 +12,9 @@ from django.contrib.auth.decorators import user_passes_test
 def home(request):
     return render(request, 'home.html')
 
-
+@login_required
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    return render(request, 'dashboard/dashboard.html')
 
 
 def contactus(request):
@@ -32,6 +32,25 @@ def please_login(request):
     msg = "You need to be logged-in to view this page"
     messages.info(request, msg)
     return render(request, 'login.html')
+
+def dlogin(request):
+    if request.user.is_authenticated:
+        messages.info(request,'You are alredy logged in.')
+        return redirect('profile')
+    else:
+        if request.method=='POST':
+            username = request.POST['username']
+            password = request.POST['password']
+            user = auth.authenticate(username=username, password=password)
+            if user is not None:
+                auth.login(request, user)
+                messages.info(request,'You are successfully logged in.')
+                return redirect('/dashboard')
+            else:
+                messages.info(request,"Invalid username/password")
+                return redirect('login')
+        else:
+            return render(request,"dashboard/login.html")
 
 
 def login(request):
