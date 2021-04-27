@@ -52,6 +52,7 @@ a:hover {
 .navbar {
     background-color: slategrey;
     height: 70px;
+    width: 100% !important;
 }
 .logo-img {
     height: 70px;
@@ -114,7 +115,6 @@ a:hover {
     padding-bottom: 5px;
 }
 
-
 .d-area {
-    min-height: 900vh;
+    min-height: 190vh;
 }
