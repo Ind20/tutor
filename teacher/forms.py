@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import contactus, userProfile, qualification, experience
+from .models import contactus, userProfile, qualification, experience, teacher
 
 
 class contactusForm(forms.ModelForm):
@@ -75,4 +75,10 @@ class  experienceForm(forms.ModelForm):
         }
 
 
-
+class teacherForm(forms.ModelForm):
+    class Meta:
+        model   = teacher
+        fields  = '__all__'
+        widgets = {
+        'first_name': forms.TextInput(attrs={'class' : 'form-control form-control-sm', 'placeholder':' Enter first name'})
+        }

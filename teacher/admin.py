@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import contactus, userProfile, qualification, experience
+from .models import contactus, userProfile, qualification, experience, teacher
 
 class contactusAdmin(admin.ModelAdmin):
     list_display =('fullname', 'phone_num', 'email', 'message')
@@ -22,3 +22,8 @@ class experienceAdmin(admin.ModelAdmin):
     list_display =('organisation', 'post', 'from_date', 'to_date')
 
 admin.site.register(experience, experienceAdmin)
+
+class teacherAdmin(admin.ModelAdmin):
+    list_display =('first_name', 'last_name')
+
+admin.site.register(teacher, teacherAdmin)

@@ -102,8 +102,7 @@ a:hover {
 }
 
 .sidebar {
-    height: 100% !important;
-    width: 168px !important;
+    width: 177px !important;
 }
 
 .widget {
@@ -116,5 +115,5 @@ a:hover {
 }
 
 .d-area {
-    min-height: 190vh;
+    min-height: 97vh;
 }
