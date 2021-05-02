@@ -23,5 +23,8 @@ urlpatterns =[
     path('dashboard', views.dashboard, name="dashboard"),
     path('dashboard/login', views.dlogin, name="dlogin"),
     path('dashboard/logout', views.dlogout, name='dlogout'),
-    path('dashboard/addteacher', views.addteacher, name='addteacher'),
+    path('dashboard/addtutor', views.addtutor, name='addtutor'),
+    path('dashboard/upload', views.upload, name='upload'),
+    path('dashboard/tutorlist', views.tutorlist, name='tutorlist'),
+    path('dashboard/result', views.result, name='result')
 ]

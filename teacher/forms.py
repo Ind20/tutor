@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import contactus, userProfile, qualification, experience, teacher
+from .models import contactus, userProfile, qualification, experience, tutor
 
 
 class contactusForm(forms.ModelForm):
@@ -75,10 +75,45 @@ class  experienceForm(forms.ModelForm):
         }
 
 
-class teacherForm(forms.ModelForm):
+class tutorForm(forms.ModelForm):
     class Meta:
-        model   = teacher
+        model   = tutor
         fields  = '__all__'
         widgets = {
-        'first_name': forms.TextInput(attrs={'class' : 'form-control form-control-sm', 'placeholder':' Enter first name'})
+
+            'first_name': forms.TextInput(attrs={'class' : 'form-control form-control-sm', 'placeholder':' Enter first name'}),
+            'last_name': forms.TextInput(attrs={'class' : 'form-control form-control-sm', 'placeholder':' Enter last name'}),
+            'nick_name': forms.TextInput(attrs={'class' : 'form-control form-control-sm', 'placeholder':' Enter nick name'}),
+            'email': forms.TextInput(attrs={'class' : 'form-control form-control-sm', 'placeholder':' Enter email'}),
+            'mobile': forms.TextInput(attrs={'class' : 'form-control form-control-sm', 'placeholder':' Enter mobile number'}),
+            'nip': forms.TextInput(attrs={'class' : 'form-control form-control-sm', 'placeholder':' Enter your NIP'}),
+            'echelon': forms.TextInput(attrs={'class' : 'form-control form-control-sm', 'placeholder':' Enter your echlon'}),
+            'dob': forms.DateTimeInput(attrs={'type': 'date', 'class' : 'form-control'}),
+            'age': forms.TextInput(attrs={'class' : 'form-control form-control-sm', 'placeholder':' Enter your age (enter only positive number)'}),
+            'gender': forms.TextInput(attrs={'class' : 'form-control form-control-sm mb-5', 'placeholder':' Enter gender'}),
+            'address_line1': forms.TextInput(attrs={'class' : 'form-control form-control-sm', 'placeholder':' Enter address line 1'}),
+            'address_line2': forms.TextInput(attrs={'class' : 'form-control form-control-sm', 'placeholder':' Enter address line 2'}),
+            'city': forms.TextInput(attrs={'class' : 'form-control form-control-sm', 'placeholder':' Enter your city'}),
+            'province': forms.TextInput(attrs={'class' : 'form-control form-control-sm', 'placeholder':' Enter your province'}),
+            'zip': forms.TextInput(attrs={'class' : 'form-control form-control-sm mb-5', 'placeholder':' Enter your zip (enter only positive number)'}),
+            'high_school_name': forms.TextInput(attrs={'class' : 'form-control form-control-sm', 'placeholder':' Enter high school'}),
+            'high_school_passing_year':forms.DateTimeInput(attrs={'type': 'date', 'class' : 'form-control'}),
+            'high_school_grade': forms.TextInput(attrs={'class' : 'form-control form-control-sm mb-5', 'placeholder':' Enter high school grade'}),
+            'graduation_degree': forms.TextInput(attrs={'class' : 'form-control form-control-sm', 'placeholder':' Enter graduation degree'}),
+            'graduation_college': forms.TextInput(attrs={'class' : 'form-control form-control-sm', 'placeholder':' Enter graduation college'}),
+            'graduation_passing_year':forms.DateTimeInput(attrs={'type': 'date', 'class' : 'form-control'}),
+            'graduation_grade': forms.TextInput(attrs={'class' : 'form-control form-control-sm mb-5', 'placeholder':' Enter graduation grade'}),
+            'postgraduation_degree': forms.TextInput(attrs={'class' : 'form-control form-control-sm', 'placeholder':' Enter postgraduation degree'}),
+            'postgraduation_college': forms.TextInput(attrs={'class' : 'form-control form-control-sm', 'placeholder':' Enter postgraduation college'}),
+            'postgraduation_passing_year':forms.DateTimeInput(attrs={'type': 'date', 'class' : 'form-control'}),
+            'postgraduation_grade': forms.TextInput(attrs={'class' : 'form-control form-control-sm mb-5', 'placeholder':' Enter post graduation grade'}),
+            'research_degree': forms.TextInput(attrs={'class' : 'form-control form-control-sm', 'placeholder':' Enter research degree'}),
+            'research_college': forms.TextInput(attrs={'class' : 'form-control form-control-sm', 'placeholder':' Enter research college name'}),
+            'research_passing_year':forms.DateTimeInput(attrs={'type': 'date', 'class' : 'form-control'}),
+            'research_grade': forms.TextInput(attrs={'class' : 'form-control form-control-sm mb-5', 'placeholder':' Enter research grade'}),
+            'other_qualification': forms.Textarea(attrs={'class' : 'form-control', 'placeholder':' Enter your other qualification, college, passing year and grage'}),
+            'current_position': forms.TextInput(attrs={'class' : 'form-control form-control-sm', 'placeholder':' Enter your current position'}),
+            'current_organisation': forms.TextInput(attrs={'class' : 'form-control form-control-sm', 'placeholder':' Enter current organisation'}),
+            'years_of_experience': forms.TextInput(attrs={'class' : 'form-control form-control-sm', 'placeholder':' Enter your years of experience (enter only positive number)'})
+
         }

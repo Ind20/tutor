@@ -28,7 +28,7 @@
                 </li>
                 <li>
                     {% if user.is_authenticated %}
-                    <a class="btn btn-info p-1 m-2" href="/dashboard/logout">Logout</a></li> 
+                    <a class="btn btn-dark btn-hover p-1 m-2" href="/dashboard/logout">Logout</a></li> 
                     {% endif %}
                 </li>
             </ul>
@@ -47,25 +47,25 @@
                             </a>
                         </li>
                         <li class="nav-item d-menu">
-                            <a class="white" href="/dashboard/addteacher">
+                            <a class="white" href="/dashboard/addtutor">
                                 <i class="bi bi-person-plus"></i>
-                                Add Teacher
+                                Add Tutor
                             </a>
                         </li>
                         <li class="nav-item d-menu">
-                            <a class="white" href="#">
+                            <a class="white" href="/dashboard/upload">
                                 <i class="bi bi-upload"></i>
                                 Upload Data
                             </a>
                         </li>
                         <li class="nav-item d-menu">
-                            <a class="white" href="#">
+                            <a class="white" href="/dashboard/tutorlist">
                                 <i class="bi bi-list-check"></i>
                                 Tutor List
                             </a>
                         </li>
                         <li class="nav-item d-menu">
-                            <a class="white" href="#">
+                            <a class="white" href="/dashboard/result">
                                 <i class="bi bi-journal-arrow-down"></i>
                                 Result
                             </a>

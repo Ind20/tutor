@@ -117,3 +117,8 @@ a:hover {
 .d-area {
     min-height: 97vh;
 }
+
+.btn-hover:hover{
+    background-color: green !important;
+    color: #f7f7f7 !important;
+}

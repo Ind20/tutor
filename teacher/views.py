@@ -3,8 +3,8 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
-from .models import userProfile, qualification, experience
-from .forms import contactusForm, userProfileForm, userUpdateForm, userProfileUpdateForm, qualificationForm, experienceForm
+from .models import userProfile, qualification, experience, tutor
+from .forms import contactusForm, userProfileForm, userUpdateForm, userProfileUpdateForm, qualificationForm, experienceForm, tutorForm
 from django.views.generic import TemplateView, ListView
 from django.contrib.auth.decorators import user_passes_test
 
@@ -32,25 +32,6 @@ def please_login(request):
     msg = "You need to be logged-in to view this page"
     messages.info(request, msg)
     return render(request, 'login.html')
-
-def dlogin(request):
-    if request.user.is_authenticated:
-        messages.info(request,'You are alredy logged in.')
-        return redirect('profile')
-    else:
-        if request.method=='POST':
-            username = request.POST['username']
-            password = request.POST['password']
-            user = auth.authenticate(username=username, password=password)
-            if user is not None:
-                auth.login(request, user)
-                messages.info(request,'You are successfully logged in.')
-                return redirect('/dashboard')
-            else:
-                messages.info(request,"Invalid username/password")
-                return redirect('login')
-        else:
-            return render(request,"dashboard/login.html")
 
 
 def login(request):
@@ -102,6 +83,8 @@ def editprofile(request):
         p_form = userProfileUpdateForm(instance=request.user.userprofile)
         return render(request, 'editprofile.html', {'u_form': u_form, 'p_form': p_form})
 
+
+@login_required
 def logout(request):
     auth.logout(request)
     messages.info(request,'You are successfully logged out.')
@@ -210,3 +193,53 @@ def editexperience(request, id):
             return redirect('/profile') 
         else:
             return render(request, 'editexperience.html', {'form': form, 'userexperience': userexperience})
+
+
+def dlogin(request):
+    if request.user.is_authenticated:
+        messages.info(request,'You are alredy logged in.')
+        return redirect('dashboard')
+    else:
+        if request.method=='POST':
+            username = request.POST['username']
+            password = request.POST['password']
+            user = auth.authenticate(username=username, password=password)
+            if user is not None:
+                auth.login(request, user)
+                messages.info(request,'You are successfully logged in.')
+                return redirect('/dashboard')
+            else:
+                messages.info(request,"Invalid username/password")
+                return redirect('dlogin')
+        else:
+            return render(request,"dashboard/login.html")
+
+@login_required
+def dlogout(request):
+    auth.logout(request)
+    return redirect('/dashboard/login')
+
+@login_required
+def upload(request):
+    return render(request, 'dashboard/upload.html')
+
+@login_required
+def addtutor(request):
+    form = tutorForm(request.POST or None)
+    if request.method=='POST':
+        if form.is_valid():
+           form.save()
+        messages.info(request,'Tutor added successfully')
+        return redirect('/dashboard/tutorlist') 
+    else:
+        return render(request, 'dashboard/addtutor.html', {'form': form})
+
+@login_required
+def tutorlist(request):
+    tutors     = tutor.objects.all()
+    return render(request, 'dashboard/tutorlist.html', {'tutors': tutors})
+
+
+@login_required
+def result(request):
+    return render(request, 'dashboard/result.html')

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import contactus, userProfile, qualification, experience, teacher
+from .models import contactus, userProfile, qualification, experience, tutor
 
 class contactusAdmin(admin.ModelAdmin):
     list_display =('fullname', 'phone_num', 'email', 'message')
@@ -23,7 +23,7 @@ class experienceAdmin(admin.ModelAdmin):
 
 admin.site.register(experience, experienceAdmin)
 
-class teacherAdmin(admin.ModelAdmin):
+class tutorAdmin(admin.ModelAdmin):
     list_display =('first_name', 'last_name')
 
-admin.site.register(teacher, teacherAdmin)
+admin.site.register(tutor, tutorAdmin)
