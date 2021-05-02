@@ -52,6 +52,7 @@ a:hover {
 .navbar {
     background-color: slategrey;
     height: 70px;
+    width: 100% !important;
 }
 .logo-img {
     height: 70px;
@@ -100,38 +101,24 @@ a:hover {
     height: 45px;
 }
 
-.sidebar-section {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-  }
-  
-  
-.sidebar-item {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-  
-  
-.make-me-sticky {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    padding: 0 15px;
-}
-
 .sidebar {
-    height: 100% !important;
+    width: 177px !important;
 }
 
 .widget {
-    margin-top: 10px;
+    margin-top: 7px;
     border-radius: 10px;
 }
 
 .d-menu {
     padding-bottom: 5px;
+}
+
+.d-area {
+    min-height: 97vh;
+}
+
+.btn-hover:hover{
+    background-color: green !important;
+    color: #f7f7f7 !important;
 }

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django_countries.fields import CountryField
 
 
 class userProfile(models.Model):
@@ -36,3 +37,40 @@ class experience(models.Model):
     from_date       = models.DateField(max_length=10)
     to_date         = models.DateField(auto_now=False, null=True)
     user            = models.ForeignKey(User, related_name='experiences', on_delete=models.CASCADE)
+
+class tutor(models.Model):
+    first_name                   = models.CharField(max_length=35)
+    last_name                    = models.CharField(max_length=35)
+    nick_name                    = models.CharField(max_length=35, null=True)
+    email                        = models.EmailField(unique=True)
+    mobile                       = models.CharField(max_length=15, unique=True)
+    nip                          = models.CharField(max_length=35, null=True)
+    echelon                      = models.CharField(max_length=35, null=True)
+    dob                          = models.DateField()
+    age                          = models.PositiveIntegerField()
+    gender                       = models.CharField(max_length=10)
+    address_line1                = models.CharField(max_length=35)
+    address_line2                = models.CharField(max_length=35, null=True)
+    city                         = models.CharField(max_length=35)
+    province                     = models.CharField(max_length=35)
+    country                      = CountryField()
+    zip                          = models.PositiveIntegerField()
+    high_school_name             = models.CharField(max_length=250)
+    high_school_passing_year     = models.DateField()
+    high_school_grade            = models.CharField(max_length=10)
+    graduation_degree            = models.CharField(max_length=250)
+    graduation_college           = models.CharField(max_length=250)
+    graduation_passing_year      = models.DateField()
+    graduation_grade             = models.CharField(max_length=10)
+    postgraduation_degree        = models.CharField(max_length=250)
+    postgraduation_college       = models.CharField(max_length=250)
+    postgraduation_passing_year  = models.DateField(null=True)
+    postgraduation_grade         = models.CharField(max_length=10, null=True)
+    research_degree              = models.CharField(max_length=250, null=True)
+    research_college             = models.CharField(max_length=250, null=True)
+    research_passing_year        = models.DateField(null=True)
+    research_grade               = models.CharField(max_length=10, null=True)
+    other_qualification          = models.TextField(max_length=1000, null=True)
+    current_position             = models.CharField(max_length=35, null=True)
+    current_organisation         = models.CharField(max_length=250, null=True)
+    years_of_experience          = models.PositiveIntegerField()
