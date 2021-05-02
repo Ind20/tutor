@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import contactus, userProfile, qualification, experience, tutor
+from .models import contactus, userProfile,tutor
 
 
 class contactusForm(forms.ModelForm):
@@ -51,30 +51,6 @@ class userUpdateForm(forms.ModelForm):
 
 
 
-class qualificationForm(forms.ModelForm):
-    class Meta:
-        model   = qualification
-        fields  = ['course', 'school', 'grade', 'year']
-        widgets = {
-            'course': forms.TextInput(attrs={'class' : 'form-control', 'placeholder':'Degree/Deploma/Others'}),
-            'school': forms.TextInput(attrs={'class' : 'form-control', 'placeholder':'College/University/Institue'}),
-            'grade': forms.TextInput(attrs={'class' : 'form-control', 'placeholder':'CGGA/Percentage'}),
-            'year': forms.DateTimeInput(attrs={'type': 'date', 'class' : 'form-control', 'placeholder':'Passing Year (YYYY-MM-DD)'})
-        }
-
-
-class  experienceForm(forms.ModelForm):
-    class Meta:
-        model   =  experience
-        fields  = ['organisation', 'post', 'from_date', 'to_date']
-        widgets = {
-            'organisation': forms.TextInput(attrs={'class' : 'form-control', 'placeholder':'College/University/Institue'}),
-            'post': forms.TextInput(attrs={'class' : 'form-control', 'placeholder':'Your post'}),
-            'from_date': forms.DateTimeInput(attrs={'type': 'date', 'class' : 'form-control', 'placeholder':'From date(YYYY-MM-DD)'}),
-            'to_date': forms.DateTimeInput(attrs={'type': 'date', 'class' : 'form-control', 'placeholder':'To date (YYYY-MM-DD)'})
-        }
-
-
 class tutorForm(forms.ModelForm):
     class Meta:
         model   = tutor
@@ -117,3 +93,10 @@ class tutorForm(forms.ModelForm):
             'years_of_experience': forms.TextInput(attrs={'class' : 'form-control form-control-sm', 'placeholder':' Enter your years of experience (enter only positive number)'})
 
         }
+
+
+
+class tutordetailForm(forms.ModelForm):
+    class Meta:
+        model   = tutor
+        fields  = '__all__'

@@ -3,18 +3,14 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User, auth
 from django.contrib.auth.decorators import login_required
-from .models import userProfile, qualification, experience, tutor
-from .forms import contactusForm, userProfileForm, userUpdateForm, userProfileUpdateForm, qualificationForm, experienceForm, tutorForm
+from .models import userProfile, tutor
+from .forms import contactusForm, userProfileForm, userUpdateForm, userProfileUpdateForm, tutorForm, tutordetailForm
 from django.views.generic import TemplateView, ListView
 from django.contrib.auth.decorators import user_passes_test
 
 
 def home(request):
     return render(request, 'home.html')
-
-@login_required
-def dashboard(request):
-    return render(request, 'dashboard/dashboard.html')
 
 
 def contactus(request):
@@ -54,42 +50,6 @@ def login(request):
             return render(request,"login.html")
 
 
-
-@login_required
-def profile (request):
-    p_form          = userProfileForm(instance=request.user.userprofile)
-    qualifications  = qualification.objects.filter(user_id=request.user.id)
-    experiences     = experience.objects.filter(user_id=request.user.id)
-    context = {
-        'proj': p_form,
-        'qualifications': qualifications,
-        'experiences': experiences
-    }
-    return render(request, 'profile.html', context)
-
-
-@login_required
-def editprofile(request):
-    if request.method =='POST':
-        u_form = userUpdateForm(request.POST or None, instance=request.user)
-        p_form = userProfileUpdateForm(request.POST or None, request.FILES or None, instance=request.user.userprofile)
-        if u_form.is_valid() and p_form.is_valid():
-            u_form.save()
-            p_form.save()
-        messages.info(request,'Your profile successfully saved.')
-        return redirect('profile')
-    else:
-        u_form = userUpdateForm(instance=request.user)
-        p_form = userProfileUpdateForm(instance=request.user.userprofile)
-        return render(request, 'editprofile.html', {'u_form': u_form, 'p_form': p_form})
-
-
-@login_required
-def logout(request):
-    auth.logout(request)
-    messages.info(request,'You are successfully logged out.')
-    return redirect('login')
-
 def register(request):
     if request.user.is_authenticated:
         messages.info(request,'You are alredy registered.')
@@ -124,75 +84,55 @@ def register(request):
     else:
         return render(request,"register.html")
 
+
 @login_required
-def addqualification(request):
-    form= qualificationForm(request.POST or None)
-    uid = request.user.id
+def profile (request):
+    p_form          = userProfileForm(instance=request.user.userprofile)
+    context = {
+        'proj': p_form
+    }
+    return render(request, 'profile.html', context)
+
+
+@login_required
+def editprofile(request):
+    if request.method =='POST':
+        u_form = userUpdateForm(request.POST or None, instance=request.user)
+        p_form = userProfileUpdateForm(request.POST or None, request.FILES or None, instance=request.user.userprofile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+        messages.info(request,'Your profile successfully saved.')
+        return redirect('profile')
+    else:
+        u_form = userUpdateForm(instance=request.user)
+        p_form = userProfileUpdateForm(instance=request.user.userprofile)
+        return render(request, 'editprofile.html', {'u_form': u_form, 'p_form': p_form})
+
+
+@login_required
+def apply(request):
+    form = tutorForm(request.POST or None)
     if request.method=='POST':
         if form.is_valid():
-           quali = form.save(commit=False)
-           quali.user = request.user
-           quali.save()
-        messages.info(request,'Qualification submitted successfully')
-        return redirect('/profile') 
+           form.save()
+        messages.info(request,'Applied for tutor successfully')
+        return redirect('/') 
     else:
-        return render(request, 'addqualification.html', {'form': form})
+        return render(request, 'apply.html', {'form': form})
+
+
+@login_required
+def logout(request):
+    auth.logout(request)
+    messages.info(request,'You are successfully logged out.')
+    return redirect('login')
 
 
 
 @login_required
-def editqualification(request, id):
-    userqualification = qualification.objects.get(id=id)
-    form = qualificationForm(request.POST or None, instance=userqualification)
-    uid = request.user.id
-    q_user = userqualification.user_id
-    if uid != q_user:
-        messages.info(request,'You do not have permisson to edit this item')
-        return redirect('/profile') 
-    else:
-        if request.method=='POST':
-            if form.is_valid():
-                form.save()
-            messages.info(request,'Qualification edited successfully')
-            return redirect('/profile') 
-        else:
-            return render(request, 'editqualification.html', {'form': form, 'userqualification': userqualification})
-
-
-
-@login_required
-def addexperience(request):
-    form= experienceForm(request.POST or None)
-    uid = request.user.id
-    if request.method=='POST':
-        if form.is_valid():
-           exp = form.save(commit=False)
-           exp.user = request.user
-           exp.save()
-        messages.info(request,'Experience submitted successfully')
-        return redirect('/profile') 
-    else:
-        return render(request, 'addexperience.html', {'form': form})
-
-
-
-@login_required
-def editexperience(request, id):
-    userexperience = experience.objects.get(id=id)
-    form = experienceForm(request.POST or None, instance=userexperience)
-    uid = request.user.id
-    q_user = userexperience.user_id
-    if uid != q_user:
-        messages.info(request,'You do not have permisson to edit this item')
-        return redirect('/profile') 
-    else:
-        if request.method=='POST':
-            if form.is_valid():
-                form.save()
-            messages.info(request,'Experience edited successfully')
-            return redirect('/profile') 
-        else:
-            return render(request, 'editexperience.html', {'form': form, 'userexperience': userexperience})
+def dashboard(request):
+    return render(request, 'dashboard/dashboard.html')
 
 
 def dlogin(request):
@@ -206,7 +146,6 @@ def dlogin(request):
             user = auth.authenticate(username=username, password=password)
             if user is not None:
                 auth.login(request, user)
-                messages.info(request,'You are successfully logged in.')
                 return redirect('/dashboard')
             else:
                 messages.info(request,"Invalid username/password")
@@ -218,6 +157,7 @@ def dlogin(request):
 def dlogout(request):
     auth.logout(request)
     return redirect('/dashboard/login')
+
 
 @login_required
 def upload(request):
@@ -238,6 +178,26 @@ def addtutor(request):
 def tutorlist(request):
     tutors     = tutor.objects.all()
     return render(request, 'dashboard/tutorlist.html', {'tutors': tutors})
+
+
+@login_required
+def tutordetail(request, id):
+    tutordetails = tutor.objects.get(id=id)
+    form = tutordetailForm(request.POST or None, instance=tutordetails)
+    return render(request, 'dashboard/tutordetails.html', {'form': form, 'tutordetails': tutordetails})
+
+
+@login_required
+def edittutor(request, id):
+    tutordetails = tutor.objects.get(id=id)
+    form = tutorForm(request.POST or None, instance=tutordetails)
+    if request.method=='POST':
+        if form.is_valid():
+           form.save()
+        messages.info(request,'Tutor details updated successfully')
+        return redirect('/dashboard/tutor/%s' %id) 
+    else:
+        return render(request, 'dashboard/edittutor.html', {'form': form, 'tutordetails': tutordetails})
 
 
 @login_required

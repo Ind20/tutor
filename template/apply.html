@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container pt-3 pb-3">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Apply</li>
+        </ol>
+    </nav>
+    <h2 class="text-center mb-0"><strong>Apply as a tutor</strong></h2>
+    <hr class="mt-1">
+    <div class="row justify-content-center">
+        <div class="col-10">
+            <form method="post" action="addtutor" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.as_p }}
+                </div>
+                <div class="submit-btn">
+                    <input type="submit" name="submit" class="btn-right btn btn-info btn-md mb-5" value="Submit">
+                </div>
+        </div>
+        </form>
+    </div>
+</div>
+</div>
+
+{% endblock %}
