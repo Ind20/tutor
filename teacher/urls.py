@@ -4,10 +4,10 @@ from . import views
 
 
 urlpatterns =[
-    path('', views.dashboard, name="dashboard"),
+    path('', views.home, name="home"),
     path('contactus', views.contactus, name='contactus'),
 
-    path('accounts/login/', views.dlogin, name='dlogin'),
+    path('accounts/login/', views.login, name='login'),
     path('login', views.login, name='login'),
     path('register', views.register, name='register'),
     path('logout', views.logout, name='logout'),
@@ -21,5 +21,7 @@ urlpatterns =[
 
 
     path('dashboard', views.dashboard, name="dashboard"),
-    path('dlogin', views.dlogin, name='dlogin'),
+    path('dashboard/login', views.dlogin, name="dlogin"),
+    path('dashboard/logout', views.dlogout, name='dlogout'),
+    path('dashboard/addteacher', views.addteacher, name='addteacher'),
 ]

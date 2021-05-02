@@ -18,14 +18,14 @@
 <body>
     <div class="container">
         <div class="row justify-content-center align-items-center" style="height:100vh">
-            <div class="col-5">
+            <div class="col-4">
                 <div class="card">
                     <div class="card-body">
                         <div class="row text-center">
                             <h3>Login</h3>
                             <hr>
                         </div>
-                        <form id="login-form" action="/dlogin" class="form needs-validation" method="post" novalidate>
+                        <form id="login-form" action="/dashboard/login" class="form needs-validation" method="post" novalidate>
                             {% csrf_token %}
                             <div class="form-group">
                                 <input class="form-control" id="inputEmailAddress" type="text"
