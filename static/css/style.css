@@ -68,6 +68,9 @@ a:hover {
     border-radius: 50%;
 }
 
+.menu {
+    padding-top: 12px !important;
+}
 
 /* - - - - - - - - - - - - - - - - - - - Footer css - - - - - - - - - - - - - - - - - - - - - -  */
 

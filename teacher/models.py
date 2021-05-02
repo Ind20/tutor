@@ -22,22 +22,6 @@ class contactus(models.Model):
     message         = models.TextField(max_length=1000)
 
 
-
-class qualification(models.Model):
-    course          = models.CharField(max_length=250)
-    school          = models.CharField(max_length=250)
-    grade           = models.CharField(max_length=10)
-    year            = models.DateField(auto_now=False, null=True)
-    user            = models.ForeignKey(User, related_name='qualifications', on_delete=models.CASCADE)
-
-
-class experience(models.Model):
-    organisation    = models.CharField(max_length=250)
-    post            = models.CharField(max_length=250)
-    from_date       = models.DateField(max_length=10)
-    to_date         = models.DateField(auto_now=False, null=True)
-    user            = models.ForeignKey(User, related_name='experiences', on_delete=models.CASCADE)
-
 class tutor(models.Model):
     first_name                   = models.CharField(max_length=35)
     last_name                    = models.CharField(max_length=35)

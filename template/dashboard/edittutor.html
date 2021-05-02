@@ -1,0 +1,21 @@
+{% extends 'dashboard/base.html' %}
+{% block content %}
+
+<h2 class="text-center mb-0"><strong>Edit Tutor</strong></h2>
+<hr class="mt-1">
+<div class="row justify-content-center">
+    <div class="col-10">
+        <form method="post" action="/dashboard/edittutor/{{tutordetails.id}}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.as_p }}
+            </div>   
+            <div class="submit-btn">
+                    <input type="submit" name="submit" class="btn-right btn btn-info btn-md mb-5" value="Update">
+            </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
